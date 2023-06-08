@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/calendar.css">
+</head>
+<body style="background: #ddd">
+
+
+    <div id="eg">
+        <input type="datetime-local">
+    </div>
+
+    <div id="calendar">
+        <div class="_i_datetime">
+            <div class="_i_datetime-input">
+                <!-- <input type="text" placeholde="dd/mm/yyyy, hh:mm"> -->
+                <!-- <input type="text" placeholder="dd"> -->
+                <div class="_i_datetime-input-value"
+                role="spinbutton"
+                aria-placeholder="dd"
+                aria-valuemin="1"
+                aria-valuemax="31"
+                aria-label="Day"
+                aria-valuenow="31"
+                aria-valuetext="31"
+                >dd</div>
+                <!-- <span class="_i_datetime-input-sep">/</span> -->
+                <!-- <input type="text" placeholder="mm"> -->
+                <div class="_i_datetime-input-value"
+                role="spinbutton"
+                aria-placeholder="mm"
+                aria-valuemin="1"
+                aria-valuemax="12"
+                aria-label="Day"
+                aria-valuenow="12"
+                aria-valuetext="12"
+                >mm</div>
+                <!-- <span class="_i_datetime-input-sep">/</span> -->
+                <!-- <input type="text" placeholder="yyyy"> -->
+                <div class="_i_datetime-input-value">yyyy</div>
+                <!-- <span class="_i_datetime-input-sep">,&nbsp;</span> -->
+                <!-- <input type="text" placeholder="hh"> -->
+                <div class="_i_datetime-input-value">--</div>
+                <!-- <span class="_i_datetime-input-sep">:</span> -->
+                <!-- <input type="text" placeholder="mm"> -->
+                <div class="_i_datetime-input-value">--</div>
+
+                <div class="_i_datetime-input-btn"></div>
+            </div>
+
+            <div class="_i_datetime-picker" style="display: block">
+                <div class="_i_datetime-picker-header">
+                    <div class="_i_datetime-picker-header-selector">
+                        <div class="wrapper">
+                            <div class="item">январь</div>
+                            <div class="item">ферваль</div>
+                            <div class="item">март</div>
+                            <div class="item selected">апрель</div>
+                            <div class="item">май</div>
+                            <div class="item">июнь</div>
+                            <div class="item">июль</div>
+                            <div class="item">август</div>
+                            <div class="item">сентябрь</div>
+                            <div class="item">октябрь</div>
+                            <div class="item">ноябрь</div>
+                            <div class="item">декабрь</div>
+                        </div>
+                    </div>
+                    <div class="_i_datetime-picker-header-selector">
+                        <div class="wrapper">
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item selected">2023</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                            <div class="item">2021</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="_i_datetime-picker-body">
+                    <div class="row m_legend">
+                        <div class="row-item">M</div>
+                        <div class="row-item">T</div>
+                        <div class="row-item">W</div>
+                        <div class="row-item">T</div>
+                        <div class="row-item">F</div>
+                        <div class="row-item">S</div>
+                        <div class="row-item">S</div>
+                    </div>
+                    <div class="row">
+                        <div class="row-item prev">1</div>
+                        <div class="row-item prev">2</div>
+                        <div class="row-item prev">3</div>
+                        <div class="row-item prev">4</div>
+                        <div class="row-item">5</div>
+                        <div class="row-item">6</div>
+                        <div class="row-item">7</div>
+                    </div>
+                    <div class="row">
+                        <div class="row-item">1</div>
+                        <div class="row-item">2</div>
+                        <div class="row-item">3</div>
+                        <div class="row-item">4</div>
+                        <div class="row-item">5</div>
+                        <div class="row-item">6</div>
+                        <div class="row-item">7</div>
+                    </div>
+                    <div class="row">
+                        <div class="row-item">1</div>
+                        <div class="row-item">2</div>
+                        <div class="row-item">3</div>
+                        <div class="row-item">4</div>
+                        <div class="row-item">5</div>
+                        <div class="row-item">6</div>
+                        <div class="row-item">7</div>
+                    </div>
+                    <div class="row">
+                        <div class="row-item">1</div>
+                        <div class="row-item">2</div>
+                        <div class="row-item">3</div>
+                        <div class="row-item selected">4</div>
+                        <div class="row-item">5</div>
+                        <div class="row-item">6</div>
+                        <div class="row-item">7</div>
+                    </div>
+                    <div class="row">
+                        <div class="row-item">1</div>
+                        <div class="row-item">2</div>
+                        <div class="row-item">3</div>
+                        <div class="row-item">4</div>
+                        <div class="row-item">5</div>
+                        <div class="row-item">6</div>
+                        <div class="row-item">7</div>
+                    </div>
+                    <div class="row">
+                        <div class="row-item">1</div>
+                        <div class="row-item">2</div>
+                        <div class="row-item">3</div>
+                        <div class="row-item next">4</div>
+                        <div class="row-item next">5</div>
+                        <div class="row-item next">6</div>
+                        <div class="row-item next">7</div>
+                    </div>
+                </div>
+                <div class="_i_datetime-picker-footer">
+                    <div class="_i_datetime-picker-footer-btn">
+                        clear
+                    </div>
+                    <div class="_i_datetime-picker-footer-btn">
+                        today
+                    </div>
+                </div>
+
+                <div class="_i_datetime-picker-hours">
+                    <div class="_i_datetime-picker-hours-disk">
+                        <div class="arrow m_minute"></div>
+                        <div class="arrow m_hour"></div>
+                    </div>
+                    <div class="_i_datetime-picker-hours-control">
+                        <div class="_i_datetime-picker-hours-selector">
+                            <div class="wrapper">
+                                <div class="item">00</div>
+                                <div class="item">01</div>
+                                <div class="item">02</div>
+                                <div class="item selected">03</div>
+                                <div class="item">04</div>
+                                <div class="item">05</div>
+                                <div class="item">06</div>
+                                <div class="item">07</div>
+                                <div class="item">08</div>
+                                <div class="item">09</div>
+                                <div class="item">10</div>
+                            </div>
+                        </div>
+                        <div class="_i_datetime-picker-hours-selector">
+                            <div class="wrapper">
+                                <div class="item">00</div>
+                                <div class="item">01</div>
+                                <div class="item">02</div>
+                                <div class="item selected">03</div>
+                                <div class="item">04</div>
+                                <div class="item">05</div>
+                                <div class="item">06</div>
+                                <div class="item">07</div>
+                                <div class="item">08</div>
+                                <div class="item">09</div>
+                                <div class="item">10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cal1">
+
+    </div>
+
+
+
+    <script src="./js/calendar.js"></script>
+
+    <script>
+
+        let parent = document.getElementById('cal1');
+        // let dateFormat = 'DD.MM.YYYY';
+        let GMT = '+3';
+
+        let dateTime = new IDateTime(parent, {
+            needHours: true,                // show hours
+            // defaultValue: 1685629911000      // set default value (await !!milliseconds)
+        });
+
+        /*
+            dateTime.setValue(timestamp)    - set Default Value into input field
+            dateTime.getValue()             - return timestamp in milliseconds
+        */
+
+
+
+
+    </script>
+
+</body>
+</html>

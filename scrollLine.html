@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/scroll_line.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div id="header">
+
+        </div>
+
+        <div class="test1" id="test1"></div>
+
+        <div class="gap"></div>
+
+        <div class="test2" id="test2"></div>
+
+        <div class="gap"></div>
+    </div>
+
+
+
+
+
+    <script>
+        let runnerHome = document.createElement('div');
+            runnerHome.className = 'b_runner';
+
+        let runner = document.createElement('div');
+            runner.className = 'b_runner-line';
+
+        runnerHome.append(runner);
+        header.append(runnerHome);
+
+        let runnerHomeWidth = runnerHome.offsetWidth;
+        let anchor = null;
+
+        let obj         = document.getElementById('test1');
+        let objTop      = obj.getBoundingClientRect().top;
+
+
+        document.addEventListener('scroll', ()=>{
+
+            let scrollY     = window.scrollY;
+
+            let objHeight   = obj.offsetHeight;
+            let k           = runnerHomeWidth/objHeight;
+
+            console.log('scrollY:   ' +scrollY);
+            console.log('objTop:    ' + objTop);
+
+
+            if(scrollY>objTop){
+
+                if(!anchor){
+                    anchor = scrollY;
+                }
+
+                let val = 100*(scrollY-anchor)/objHeight;
+
+                runner.style.width = val + '%';
+
+            } else {
+                runner.style.width = 0;
+            }
+
+
+            console.log('---------------------------------');
+
+        })
+
+    </script>
+
+</body>
+</html>

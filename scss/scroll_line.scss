@@ -1,0 +1,68 @@
+@import 'reset';
+
+html {
+    background: #333;
+}
+
+.wrapper {
+    position: relative;
+    width: 1320px;
+    min-height: 100vh;
+    background: #ddd;
+    margin: auto;
+    padding-top: 100px;
+
+    #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 50px;
+        background: #aaaaaa67;
+    }
+
+    .test1 {
+        width: 100%;
+        height: 3000px;
+        background: url(../img/test.jpg) repeat-y 50% 0;
+        background-size: 100% auto;
+        margin-bottom: 60px;
+        outline: 5px solid rgb(0, 255, 17);
+    }
+
+    .gap {
+        width: 100%;
+        height: 100px;
+        background: #2200fc;
+        margin-bottom: 60px;
+    }
+
+    .test2 {
+        width: 100%;
+        height: 6000px;
+        background: url(../img/test.jpg) repeat-y 50% 0;
+        background-size: 100% auto;
+        margin-bottom: 60px;
+    }
+
+    .b_runner {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 1320px;
+        height: 6px;
+        margin: auto;
+
+        &-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            background: #b11116;
+            transition: all 0.1s ease;
+        }
+    }
+}
