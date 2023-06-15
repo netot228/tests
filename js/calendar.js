@@ -153,6 +153,9 @@ class IDateTime {
                 }
 
                 this.input.querySelectorAll('input').forEach(el=>{
+                    el.addEventListener('focus', ()=>{
+                        this.closeSelectors();
+                    })
                     el.addEventListener('input', e=>{
                         this.inputHolder(el, e);
                     })
@@ -167,9 +170,9 @@ class IDateTime {
                         }
                     })
                 })
-
+                
             // END pseudo input block
-
+                
             // picker
 
                 this.picker = document.createElement('div');
@@ -299,6 +302,9 @@ class IDateTime {
 
     inputHolder(input,e){
 
+        console.log('input focus');
+        
+
         if(input.value.match(/\D/)){
             input.value = input.value.replace(/\D/g, '');
         }
@@ -371,6 +377,8 @@ class IDateTime {
     }
 
     generatePickerBody(date, setValue) {
+
+        this.closeSelectors();
 
         let year = date.getFullYear();
         let month = date.getMonth();
@@ -496,12 +504,18 @@ class IDateTime {
                 this.selectHolder(this.yearSelector, item, item.dataset.year, this.month);
             })
 
-            // проверить на какое место вставить год, если он не из списка
-            if(this.year<this.yearWrapper.firstChild.dataset.year){
-                this.yearWrapper.prepend(item);
-            } else {
-                this.yearWrapper.append(item);
-            }
+            let stopFlag = false;
+            this.yearWrapper.childNodes.forEach((el,i)=>{
+                if(!stopFlag){
+                    if(el.dataset.year>this.year){
+                        this.yearWrapper.insertBefore(item, el);
+                        stopFlag = true;
+                    } else if(i==(this.yearWrapper.childNodes.length - 1)){
+                        this.yearWrapper.append(item);
+                        stopFlag = true;
+                    }
+                }
+            })
         }
 
         let checkYear = this.yearSelector.querySelector('.selected');
@@ -511,6 +525,15 @@ class IDateTime {
             if(correctYear){
                 correctYear.classList.add('selected');
             }
+        }
+    }
+
+    closeSelectors(){
+        if(this.yearSelector.classList.contains('opened')){
+            this.yearSelector.classList.remove('opened');
+        }
+        if(this.monthSelector.classList.contains('opened')){
+            this.monthSelector.classList.remove('opened');
         }
     }
 
