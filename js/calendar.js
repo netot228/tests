@@ -94,8 +94,8 @@ class IDateTime {
                 this.inputYear.type = 'text';
                 this.inputYear.placeholder = 'yyyy';
                 this.inputYear.size = 4;
-                this.inputYear.dataset.min = 1;
-                this.inputYear.dataset.max = 9999;
+                this.inputYear.dataset.min = 1900;
+                this.inputYear.dataset.max = 2100;
                 this.inputYear.dataset.type = 'year';
                 this.inputYear.dataset.value = this.year;
 
@@ -302,9 +302,6 @@ class IDateTime {
 
     inputHolder(input,e){
 
-        console.log('input focus');
-        
-
         if(input.value.match(/\D/)){
             input.value = input.value.replace(/\D/g, '');
         }
@@ -313,7 +310,13 @@ class IDateTime {
             let val = input.value * 1;
             if(e.code=="ArrowUp"){
                 e.preventDefault();
-                input.value = (val + 1) > input.dataset.max ? input.dataset.min : (val + 1);
+                console.dir(input);
+                if(val == 0 && (input.dataset.type!='hour' && input.dataset.type!='min')){
+                    input.value = input.dataset.min;
+                } else {
+                    input.value = (val + 1) > input.dataset.max ? input.dataset.min : (val + 1);
+                }
+                
             } else if(e.code=="ArrowDown"){
                 e.preventDefault();
                 input.value = (val - 1) < input.dataset.min ? input.dataset.max : (val - 1);
@@ -321,6 +324,7 @@ class IDateTime {
         }
 
         if(input.value){
+
             let checkVal = input.value * 1;
 
             if(String(checkVal).length<input.size){
@@ -347,6 +351,10 @@ class IDateTime {
             } else {
                 input.dataset.value = input.value;
             }
+
+            this[input.dataset.type] = input.dataset.value;
+            let setDate = new Date(this.year,this.month,this.day,this.hour,this.min);
+            this.setValue(setDate, 'onlyHomeData');
 
         }
 
@@ -474,6 +482,13 @@ class IDateTime {
 
         if(!this.picker.classList.contains('opened')){
             this.picker.classList.add('opened');
+            
+            if(this.picker.getBoundingClientRect().bottom>document.documentElement.clientHeight){
+                this.picker.classList.add('m_opentoup');
+            } else if(this.picker.getBoundingClientRect().top<0) {
+                this.picker.classList.remove('m_opentoup');
+            }
+
             document.documentElement.addEventListener('click', this.pickerCloser.bind(this));
         }
 
@@ -537,7 +552,7 @@ class IDateTime {
         }
     }
 
-    setValue(timestamp){
+    setValue(timestamp,onlyHomeData){
         // this.inputDay
         // this.inputMonth
         // this.inputYear
@@ -547,6 +562,8 @@ class IDateTime {
             throw new Error('IDateTime accepted incorrect time format');
         }
 
+        this.home.dataset.value = +date; // set value == milliseconds
+        
         let day = this.day = date.getDate();
         let month = this.month = date.getMonth();
         let year = this.year = date.getFullYear();
@@ -554,7 +571,6 @@ class IDateTime {
         let min  = this.min = date.getMinutes();
 
         // .dataset.value - technical information
-        this.home.dataset.value = +date; // set value == milliseconds
         this.inputDay.dataset.value = day;
         this.inputMonth.dataset.value = month;
         this.inputYear.dataset.value = year;
@@ -562,6 +578,21 @@ class IDateTime {
         if(this.needHoursFlag){
             this.inputHour.dataset.value = hour;
             this.inputMin.dataset.value = min;
+        }
+        
+        if(onlyHomeData) {
+
+            // .value - visual information
+                this.inputDay.placeholder = day.toString().length < 2 ? `0${day}` : day;
+                ++month;// correcting month
+                this.inputMonth.placeholder = month.toString().length < 2 ? `0${month}` : month;
+                this.inputYear.placeholder = year.toString().length < 2 ? `0${year}` : year;
+
+                if(this.needHoursFlag){
+                    this.inputHour.placeholder = hour.toString().length < 2 ? `0${hour}` : hour;
+                    this.inputMin.placeholder = min.toString().length < 2 ? `0${min}` : min;
+                }
+            return;
         }
 
         // .value - visual information
@@ -584,6 +615,15 @@ class IDateTime {
         this.input.querySelectorAll('input').forEach(el=>{
             el.value = '';
         })
+
+        this.inputDay.placeholder = 'dd';
+        this.inputMonth.placeholder = 'mm';
+        this.inputYear.placeholder = 'yyyy';
+
+        if(this.needHoursFlag){
+            this.inputHour.placeholder = 'hh';
+            this.inputMin.placeholder = 'mm';
+        }
     }
 
 }

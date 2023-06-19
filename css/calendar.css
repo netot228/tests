@@ -151,6 +151,10 @@ html body a {
   background: #ddd;
   display: none;
 }
+._i_datetime-picker.m_opentoup {
+  top: auto;
+  bottom: calc(100% + 2px);
+}
 ._i_datetime-picker.opened {
   display: block;
 }

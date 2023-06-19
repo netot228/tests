@@ -150,6 +150,11 @@
         border-radius: 2px;
         background: $bgColor;
         display: none;
+        
+        &.m_opentoup {
+            top: auto;
+            bottom: calc(100% + 2px);
+        }
 
         &.opened {
             display: block;
