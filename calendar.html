@@ -189,6 +189,10 @@
         </div>
     </div> -->
 
+
+    <div id="calendar">
+
+    </div>
     <div id="cal1" style="">
 
     </div>
@@ -201,20 +205,23 @@
 
         let parent = document.getElementById('cal1');
         // let dateFormat = 'DD.MM.YYYY';
-        let GMT = '+3';
+        // let GMT = '+3';
 
         let dateTime = new IDateTime(parent, {
             needHours: true,                // show hours
             // defaultValue: 1685629911000      // set default value (await !!milliseconds)
         });
 
+        let p2 = document.getElementById('calendar');
+        let dateTime2 = new IDateTime(p2, {
+            needHours: true,                // show hours
+            defaultValue: 1685629911000      // set default value (await !!milliseconds)
+        });
+
         /*
             dateTime.setValue(timestamp)    - set Default Value into input field
             dateTime.getValue()             - return timestamp in milliseconds
         */
-
-
-
 
     </script>
 

@@ -1,17 +1,5 @@
 /*
 
-    должен принимать формат вывода даты
-    DD/MM/YYYY, hh:mm - исходя из этого строить DOM
-    DD/MM
-
-    где
-        D - день
-        M - месяц
-        Y - год
-        h - часы
-        m - минуты
-        s - секунды
-
     income
             parentNode  - HTMLElement || querySelect string
             options = {
@@ -153,8 +141,9 @@ class IDateTime {
                 }
 
                 this.input.querySelectorAll('input').forEach(el=>{
-                    el.addEventListener('focus', ()=>{
+                    el.addEventListener('focus', e=>{
                         this.closeSelectors();
+                        this.pickerCloser(e);
                     })
                     el.addEventListener('input', e=>{
                         this.inputHolder(el, e);
@@ -162,17 +151,26 @@ class IDateTime {
                     el.addEventListener('keydown', e=>{
                         this.inputHolder(el, e);
                     })
-                    el.addEventListener('blur', ()=>{
+                    el.addEventListener('blur', e=>{
+
+                        //set the value if it is empty
                         this[el.dataset.type] = el.dataset.value;
-                        if(this.picker.classList.contains('opened')){
-                            let now = new Date(this.year, this.month, this.day, this.hour, this.month);
-                            this.generatePickerBody(now);
+
+                        if(el.dataset.type != 'hour' && el.dataset.type != 'min' && !+el.value){
+                            el.value = el.dataset.type == 'month' ? 1+ (+el.dataset.value) : el.dataset.value;
+                            this.inputHolder(el, e);
                         }
+
+                        // if(this.picker.classList.contains('opened')){
+                        //     let now = new Date(this.year, this.month, this.day, this.hour, this.month);
+                        //     this.generatePickerBody(now);
+                        // }
+
                     })
                 })
-                
+
             // END pseudo input block
-                
+
             // picker
 
                 this.picker = document.createElement('div');
@@ -292,7 +290,7 @@ class IDateTime {
     }
 
     pickerCloser(e){
-        if(e.target.closest(`#${this.home.id}`)==null && !e.target.dataset.pickerDay){
+        if(e.type == 'focus' || (e.target.closest(`#${this.home.id}`)==null && !e.target.dataset.pickerDay)){
             this.picker.classList.remove('opened');
             this.monthSelector.classList.remove('opened');
             this.yearSelector.classList.remove('opened');
@@ -307,18 +305,26 @@ class IDateTime {
         }
 
         if(e.type=='keydown'){
-            let val = input.value * 1;
+
+            let val = +(input.value ? input.value : input.dataset.value);
+
             if(e.code=="ArrowUp"){
                 e.preventDefault();
-                console.dir(input);
+
                 if(val == 0 && (input.dataset.type!='hour' && input.dataset.type!='min')){
                     input.value = input.dataset.min;
                 } else {
+                    if(input.value == ''){
+                        val = input.dataset.type == 'month' ? +input.dataset.value : +input.dataset.value - 1;
+                    }
                     input.value = (val + 1) > input.dataset.max ? input.dataset.min : (val + 1);
                 }
-                
+
             } else if(e.code=="ArrowDown"){
                 e.preventDefault();
+                if(input.value == ''){
+                    val = input.dataset.type == 'month' ? +input.dataset.value+2 : +input.dataset.value + 1;
+                }
                 input.value = (val - 1) < input.dataset.min ? input.dataset.max : (val - 1);
             }
         }
@@ -341,20 +347,52 @@ class IDateTime {
 
             if(+input.value>input.dataset.max){
                 input.value = input.dataset.max;
-                if(input.nextSibling){
-                    input.nextSibling.focus();
+                // if(input.nextSibling){
+                //     input.nextSibling.focus();
+                // }
+            }
+
+            if(input.dataset.type=='hour' || input.dataset.type=='min'){
+
+                input.dataset.value = +input.value;
+                this[input.dataset.type] = input.dataset.value;
+
+            } else if(+input.value>0){
+
+                if(input.dataset.type == 'month'){
+                    input.dataset.value = +input.value - 1;
+                } else {
+                    input.dataset.value = +input.value;
                 }
+
+                this[input.dataset.type] = +input.dataset.value;
+
+                // need to check the correctness of the date
+                if(input.dataset.type=='month' || input.dataset.type=='year'){
+                    let lastDayOfMonth = (new Date(this.year, +this.month + 1, 0)).getDate();
+
+                    if(+this.inputDay.value > lastDayOfMonth){
+                        this.inputDay.value = lastDayOfMonth;
+                        this.inputDay.dataset.value = lastDayOfMonth;
+                        this.day = lastDayOfMonth;
+                    }
+                }
+
+
+                // if(+this.inputDay.value==0){
+
+                //     this.inputDay.value = String(this.inputDay.dataset.value).length<2 ? '0' + this.inputDay.dataset.value : this.inputDay.dataset.value;
+                //     // this.inputDay.dataset.value = 1;
+                //     this.day = this.inputDay.dataset.value;
+                // }
+
+
+
             }
 
-            if(input.dataset.type == 'month'){
-                input.dataset.value = input.value - 1;
-            } else {
-                input.dataset.value = input.value;
-            }
-
-            this[input.dataset.type] = input.dataset.value;
             let setDate = new Date(this.year,this.month,this.day,this.hour,this.min);
             this.setValue(setDate, 'onlyHomeData');
+
 
         }
 
@@ -482,7 +520,7 @@ class IDateTime {
 
         if(!this.picker.classList.contains('opened')){
             this.picker.classList.add('opened');
-            
+
             if(this.picker.getBoundingClientRect().bottom>document.documentElement.clientHeight){
                 this.picker.classList.add('m_opentoup');
             } else if(this.picker.getBoundingClientRect().top<0) {
@@ -553,9 +591,7 @@ class IDateTime {
     }
 
     setValue(timestamp,onlyHomeData){
-        // this.inputDay
-        // this.inputMonth
-        // this.inputYear
+
         let date = new Date(timestamp);
 
         if(date == 'Invalid Date') {
@@ -563,7 +599,7 @@ class IDateTime {
         }
 
         this.home.dataset.value = +date; // set value == milliseconds
-        
+
         let day = this.day = date.getDate();
         let month = this.month = date.getMonth();
         let year = this.year = date.getFullYear();
@@ -579,26 +615,28 @@ class IDateTime {
             this.inputHour.dataset.value = hour;
             this.inputMin.dataset.value = min;
         }
-        
+
+        ++month; // correcting month
+
         if(onlyHomeData) {
 
-            // .value - visual information
+            // set placeholder for visual hint
                 this.inputDay.placeholder = day.toString().length < 2 ? `0${day}` : day;
-                ++month;// correcting month
+
                 this.inputMonth.placeholder = month.toString().length < 2 ? `0${month}` : month;
-                this.inputYear.placeholder = year.toString().length < 2 ? `0${year}` : year;
+                this.inputYear.placeholder = year;
 
                 if(this.needHoursFlag){
                     this.inputHour.placeholder = hour.toString().length < 2 ? `0${hour}` : hour;
                     this.inputMin.placeholder = min.toString().length < 2 ? `0${min}` : min;
                 }
+
             return;
         }
 
-        // .value - visual information
+        // .value - visual information !== dataset.value
             this.inputDay.value = day.toString().length < 2 ? `0${day}` : day;
 
-            ++month;// correcting month
             this.inputMonth.value = month.toString().length < 2 ? `0${month}` : month;
             this.inputYear.value = year.toString().length < 2 ? `0${year}` : year;
 
