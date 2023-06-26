@@ -402,4 +402,45 @@ body {
   color: #333;
 }
 
+.longblock {
+  position: relative;
+  width: 200px;
+  height: 4000px;
+  background-color: #505050;
+}
+
+#scroller {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  height: 200px;
+  margin: auto;
+  background: #ddd;
+  overflow: hidden;
+  padding: 10px;
+}
+#scroller .wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  overflow-x: scroll;
+  height: 300px;
+}
+#scroller .wrapper .item {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  width: 100px;
+  height: 30px;
+  margin: 0 1px;
+  background: #a3665d;
+  border-radius: 20px 0 0 0;
+}
+
 /*# sourceMappingURL=style.css.map */

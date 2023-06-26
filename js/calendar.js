@@ -18,6 +18,15 @@ class IDateTime {
                 'May', 'June', 'July', 'August',
                 'September', 'October', 'November', 'December'];
 
+    //detect mobile
+    isMobile = (function () {
+        if (/iPhone|iPod|iPad|Android|Windows Phone|\bWindows(?:.+)ARM\b|BlackBerry|BB10|Opera Mini|\b(CriOS|Chrome)(?:.+)Mobile|Mobile(?:.+)Firefox\b/i.test(navigator.userAgent)) {
+            return true;
+        } else {
+            return false;
+        }
+    })();
+
     constructor(parentNode, options) {
 
 
@@ -144,6 +153,7 @@ class IDateTime {
                     el.addEventListener('focus', e=>{
                         this.closeSelectors();
                         this.pickerCloser(e);
+                        this.inputHolder(el, e);
                     })
                     el.addEventListener('input', e=>{
                         this.inputHolder(el, e);
@@ -161,10 +171,15 @@ class IDateTime {
                             this.inputHolder(el, e);
                         }
 
-                        // if(this.picker.classList.contains('opened')){
-                        //     let now = new Date(this.year, this.month, this.day, this.hour, this.month);
-                        //     this.generatePickerBody(now);
-                        // }
+                        if(this.isMobile){
+                            if(el.dataset.type=='year'){
+                                el.value = el.dataset.value;
+                            } else {
+                                if(el.value.toString().length < 2){
+                                    el.value = '0' + el.value;
+                                }
+                            }
+                        }
 
                     })
                 })
@@ -333,23 +348,23 @@ class IDateTime {
 
             let checkVal = input.value * 1;
 
-            if(String(checkVal).length<input.size){
 
-                let addZero = '';
-                for(let i = 0; i<(input.size - String(checkVal).length); i++){
-                    addZero += '0'
+            if(!this.isMobile){
+                if(String(checkVal).length<input.size){
+
+                    let addZero = '';
+                    for(let i = 0; i<(input.size - String(checkVal).length); i++){
+                        addZero += '0'
+                    }
+                    input.value = addZero + checkVal;
+
+                } else if(String(checkVal).length>=input.size){
+                    input.value = input.value.replace(/^0/, '');
                 }
-                input.value = addZero + checkVal;
-
-            } else if(String(checkVal).length>=input.size){
-                input.value = input.value.replace(/^0/, '');
             }
 
             if(+input.value>input.dataset.max){
                 input.value = input.dataset.max;
-                // if(input.nextSibling){
-                //     input.nextSibling.focus();
-                // }
             }
 
             if(input.dataset.type=='hour' || input.dataset.type=='min'){
@@ -377,16 +392,6 @@ class IDateTime {
                         this.day = lastDayOfMonth;
                     }
                 }
-
-
-                // if(+this.inputDay.value==0){
-
-                //     this.inputDay.value = String(this.inputDay.dataset.value).length<2 ? '0' + this.inputDay.dataset.value : this.inputDay.dataset.value;
-                //     // this.inputDay.dataset.value = 1;
-                //     this.day = this.inputDay.dataset.value;
-                // }
-
-
 
             }
 
@@ -513,8 +518,6 @@ class IDateTime {
                 })
             }
         }
-
-        // console.dir(this.pickerMonthPage.children);
 
         this.checkSelectors();
 
@@ -650,8 +653,17 @@ class IDateTime {
     clearValue(){
         this.home.dataset.value = null;
         this.picker.classList.remove('opened');
+
+        let dateNow = new Date();
+        this.day    = dateNow.getDate();
+        this.month  = dateNow.getMonth();
+        this.year   = dateNow.getFullYear();
+        this.hour   = dateNow.getHours();
+        this.min    = dateNow.getMinutes();
+
         this.input.querySelectorAll('input').forEach(el=>{
             el.value = '';
+            el.dataset.value = '';
         })
 
         this.inputDay.placeholder = 'dd';
@@ -662,6 +674,10 @@ class IDateTime {
             this.inputHour.placeholder = 'hh';
             this.inputMin.placeholder = 'mm';
         }
+    }
+
+    getValue(){
+        return +this.home.dataset.value;
     }
 
 }

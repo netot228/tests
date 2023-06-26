@@ -11,9 +11,13 @@
 <body style="background: #ddd">
 
 
-    <div id="eg">
+    <!-- <div id="eg">
         <input type="datetime-local">
     </div>
+
+    <div id="num">
+        <input type="number" id="tentacles"  min="01" max="31">
+    </div> -->
 
     <!-- <div id="calendar">
         <div class="_i_datetime">
@@ -217,6 +221,16 @@
             needHours: true,                // show hours
             defaultValue: 1685629911000      // set default value (await !!milliseconds)
         });
+
+        calendar.addEventListener('click', (e)=>{
+            e.preventDefault();
+            // dateTime2.setValue(1676374503000)
+            console.dir(e);
+        })
+
+        // window.oncontextmenu = function () {
+        //     alert('Right Click')
+        // }
 
         /*
             dateTime.setValue(timestamp)    - set Default Value into input field
