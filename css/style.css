@@ -443,4 +443,47 @@ body {
   border-radius: 20px 0 0 0;
 }
 
+#textarea_checking .wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 800px;
+  height: 600px;
+  margin: auto;
+  background: #aaa;
+  font: 400 14px/1 arial;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+#textarea_checking .wrapper .btns {
+  display: flex;
+  width: 100%;
+  padding: 30px;
+  justify-content: space-around;
+}
+#textarea_checking .wrapper .btns button {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  color: #333;
+  border: 1px solid red;
+  background-color: #bad6fb;
+  cursor: pointer;
+}
+#textarea_checking .wrapper .btns button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+#textarea_checking .wrapper textarea {
+  position: relative;
+  width: 80%;
+  height: 400px;
+  padding: 20px;
+  background-color: #ddd;
+  margin: auto;
+}
+
 /*# sourceMappingURL=style.css.map */

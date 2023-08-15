@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <textarea id="textarea">Не следует, суицид однако забывать, что дальнейшее развитие различных форм скелет\nдеятельности влечет за собой процесс внедрения и модернизации существенных финансовых и административных условий. Идейные соображения высшего порядка, а также сложившаяся убить структура организации способствует подготовки и реализации новых предложений. Повседневная практика показывает, что дальнейшее развитие различных форм деятельности представляет собой интересный голодомор эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач. Таким образом постоянное информационно-пропагандистское обеспечение нашей деятельности требуют определения и уточнения новых предложений. Не следует, однако забывать, что сложившаяся структура организации играет важную роль в формировании позиций, смерти занимаемых участниками в отношении поставленных задач.</textarea>
+
+
+    <script>
+
+        let str = 'Не следует, суицид однако забывать, что дальнейшее развитие различных форм скелет\nдеятельности влечет';
+
+        let expr1 = /суицид/g;
+
+        let a = 'суицид';
+        let expr2 = new RegExp(`${a}`,'g');
+
+        console.dir(str.match(expr1));
+        console.dir(str.match(expr2));
+
+        // let str1 = 'Не следует, суицид однако забывать, что дальнейшее развитие различных форм скелет\nдеятельности влечет за собой процесс внедрения и модернизации существенных финансовых и административных условий. Идейные соображения высшего порядка, а также сложившаяся убил структура организации убить способствует подготовки и реализации новых предложений. Повседневная практика показывает, что дальнейшее развитие различных форм деятельности представляет собой';
+
+        // let str2 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus blandit dictum sem, eget porta death ipsum ultricies dictum. Pellentesque ex ex, sagittis quis ex eget, sodales condimentum mauris. Donec ullamcorper vitae ligula non tempor. Ut rutrum tortor a orci egestas consectetur. Etiam nec arcu risus. Pellentesque habitant morbi tristique senectus et.';
+
+        // // let text = textarea.value;
+        // // let test = text.match(/\bубить\b/);
+
+        // console.dir(str1.match(/убил|убить/gi));
+        // console.dir(str2.match(/\bdeath\b/));
+
+        let stopWords = [{"name":"убить","reg":"убить;убил,убила,убили"},{"name":"суицид","reg":"СуицидАльный; суицид"},{"name":"скелет","reg":""},{"name":"Холокост","reg":"холокоста"},{"name":"Голодомор","reg":""},{"name":"похороны","reg":""},{"name":"погибший","reg":""},{"name":"покойный","reg":""},{"name":"казнь","reg":""},{"name":"киллер","reg":""},{"name":"сдох","reg":""},{"name":"расстрел","reg":""},{"name":"смерть","reg":"смеРть,смертью, смерти"},];
+
+
+        stopWords.forEach(el=>{
+
+            // в поле reg заменить символы [, | ;] на ,
+            // сделать сплит по этому символу
+            // трим каждого элемента
+            // toLowerCase каждого элемента
+            // склеить в строку с разделителем |
+            // добавить к строке поле name
+
+            let regStr = '';
+
+            // console.dir(el.reg);
+
+            if(el.reg){
+                let reg = el.reg.replace(/,|;|\|/, ',');
+                let regArr = reg.split(',');
+                regArr.forEach(el=>{
+                    let word = el.trim().toLowerCase();
+
+                    regStr += word + '|';
+                })
+            }
+
+            regStr += el.name.trim().toLowerCase();
+
+            console.log(regStr);
+
+            // создать регулярку через new RegExp с флагами im
+            // искать совпадение по границам слова
+            // получить кусок подстроки в совпадении в диапазоне - 3 слова + слова
+
+            let regExp = new RegExp(`${regStr}`,'i');
+
+            console.log(regExp);
+            let checkStr = textarea.value;
+            if(checkStr.match(regExp)){
+                console.log('checkstr');
+                let a = textarea.value.match(regExp);
+                console.dir(a);
+            }
+
+
+            // new RegExp(`<${tag}>`);
+            // flags -  i: регистронезависмый
+            //          m: многострочный
+            // let regExp = new RegExp(``);
+        })
+
+
+
+
+    </script>
+
+</body>
+</html>

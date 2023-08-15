@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body id="textarea_checking">
+
+
+    <div class="wrapper">
+
+        <div class="btns">
+            <button>
+                addIncut
+            </button>
+            <button id="editIncut" disabled>
+                editIncut
+            </button>
+            <button id="removeIncut" disabled>
+                removeIncut
+            </button>
+        </div>
+        <textarea name="" id="_id_textarea" cols="30" rows="10"></textarea>
+
+    </div>
+
+    <script>
+
+        editIncut.addEventListener('click', function(){
+            console.log(_id_textarea.value[_id_textarea.selectionStart]);
+        })
+
+        function checkPos(){
+
+            let start   = _id_textarea.selectionStart;
+            let end     = _id_textarea.selectionEnd;
+
+            if(start == end){
+                start   = start - 4 >= 0 ? start - 4 : 0;
+                end     = end + 4 <= _id_textarea.value.length ?  end + 4 : _id_textarea.value.length;
+            }
+
+            let subStr = _id_textarea.value.substring(start,end);
+
+            if(subStr.match(/<\d+>/)){
+                let incutNum = subStr.match(/<\d+>/)[0].replace(/\D/g, '');
+            }
+            // let incutNum
+
+
+            // console.log(_id_textarea.value[_id_textarea.selectionStart]);
+
+            // console.log(_id_textarea.selectionStart);
+            // console.log(_id_textarea.selectionEnd);
+
+        }
+
+
+        // _id_textarea.addEventListener('focus',()=>{
+        //     let checkingTimer = setInterval(checkPos, 100);
+        //     _id_textarea.addEventListener('blur', ()=>{
+        //         clearInterval(checkingTimer);
+        //     })
+        // })
+
+        _id_textarea.addEventListener('click', ()=>{
+            console.log('click');
+            setTimeout(checkPos)
+        });
+        _id_textarea.addEventListener('keydown', ()=>{
+            console.log('keydown');
+            setTimeout(checkPos)
+        });
+
+
+    </script>
+
+</body>
+</html>

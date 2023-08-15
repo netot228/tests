@@ -13,209 +13,11 @@
 <body>
 
 
-    <!-- <div id="test">
 
-        <select name="" id="check" multiple size="3">
 
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
 
-        </select>
 
-
-        <div name="" id="check_div" multiple size="3">
-
-            <input type="text" id="input_check">
-
-        </div>
-
-        <img src="./img/photo_eg.jpg" width="100px" title="prettyGirl" alt="">
-
-    </div> -->
-
-
-    <div id="select">
-
-        <div class="item" data-value="item1">item1</div>
-        <div class="item" data-value="item2">item2</div>
-        <div class="item" data-value="item3">item3</div>
-        <div class="item" data-value="item4">item4</div>
-        <div class="item" data-value="item5">item5</div>
-        <div class="item" data-value="item6">item6</div>
-        <div class="item" data-value="item7">item7</div>
-        <div class="item" data-value="item8">item8</div>
-        <div class="item" data-value="item9">item9</div>
-        <div class="item" data-value="item0">item0</div>
-
-        <div class="topBtn"></div>
-        <div class="dwnBtn"></div>
-
-        <div class="collect"></div>
-    </div>
-
-
-
-    <!-- <option value=6186889>6186889: Санкции против России
-    <option value=15521725>15521725: Королевская семья Британии
-    <option value=5963641>5963641: Крым -->
-
-    <script>
-
-
-        let items = select.querySelectorAll('.item');
-        let isMacos = navigator.userAgent.toUpperCase().indexOf('MAC')>=0 ? true : false;
-
-        let lastSelectedItem = null;
-
-        let val1 = [];
-        let val2 = [];
-
-        // console.log('items1');
-        // console.dir(items);
-
-        items.forEach((item,num)=>{
-
-
-            val1.push(item.dataset.value);
-            item.addEventListener('click', function(e){
-                // if(this.classList.contains('selected')){
-                //     this.classList.remove
-                // }
-
-                console.dir(e);
-
-                if((isMacos && !e.metaKey) && !e.ctrlKey){
-                    items.forEach(el=>{
-                        if(el.classList.contains('selected')){
-                            el.classList.remove('selected');
-                        }
-                    })
-                }
-
-                this.classList.toggle('selected');
-
-                // console.dir(Array.prototype.slice.call(items).indexOf(item));
-
-            })
-        })
-
-        let topBtn = select.querySelector('.topBtn');
-        topBtn.addEventListener('click',function(){
-            moveNode(-1);
-        })
-        let dwnBtn = select.querySelector('.dwnBtn');
-        dwnBtn.addEventListener('click',function(){
-            moveNode(1);
-        })
-
-        function moveNode(step){
-            if(!select.querySelector('.item.selected')) return;
-
-            items = select.querySelectorAll('.item');
-            let movedItem = select.querySelector('.item.selected');
-            let movedItemPos = Array.prototype.slice.call(items).indexOf(movedItem);
-
-            if(step<0 && movedItemPos==0) return;
-            if(step>0 && movedItemPos==(items.length-1)) return;
-
-            if(step<0){
-                items[(movedItemPos+step)].before(movedItem);
-            } else if(step>0){
-                items[(movedItemPos+step)].after(movedItem);
-            }
-
-            // console.log('items2');
-            console.dir(select);
-
-
-            let itemsDynamic = select.getElementsByClassName('item');
-            console.dir(itemsDynamic);
-
-
-            val2 = [];
-            for(let i=0; i<itemsDynamic.length; i++){
-                val2.push(itemsDynamic[i].dataset.value);
-            }
-            // itemsDynamic.forEach(el=>{
-            //     val2.push(el.dataset.value);
-            // })
-            console.dir(val2);
-
-        }
-
-        let collectBtn = select.querySelector('.collect');
-        collectBtn.addEventListener('click', function(){
-
-            console.log('val2');
-            console.dir(val2);
-
-            let a = val1.join(', ');
-            let b = val2.length>0 ? val2.join(', ') : a;
-
-            console.log('a is: ' + a);
-            console.log('b is: ' + b);
-        })
-
-
-
-        let str1 = '6186889,5963641';
-        let ids = [
-            '6336889',
-            '155244425',
-            '5963641',
-            '1234545',
-            '6186889'
-        ];
-
-        let flag = false;
-
-        let result = '';
-
-        let strArr = str1.split(',');
-        ids.forEach((el,i)=>{
-
-            if(strArr.includes(el)){
-                ids.splice(i,1);
-            }
-        })
-
-        console.dir(ids);
-
-
-        class Test {
-            constructor(str){
-                if(str=='zzz'){
-                    this.response = 'yo!'
-                } else {
-                    return {};
-                }
-            }
-            check(){
-                console.log(this.response);
-            }
-        }
-
-        let q = new Test('zzz');
-        q.check();
-
-        console.dir(q);
-
-        let a = new Test('sdad');
-        // a.check();
-
-        console.log('a');
-        console.dir(a);
-
-        if(a){
-            console.log('check')
-        }
-
-    </script>
-
-
-
-    <div class="_tet" style="font-size: 12px; line-height: 1;">
+    <div id="_tet" class="_tet" style="font-size: 12px; line-height: 1;">
 
         <div class="datelocal">
             <input type="datetime-local" value="" id="_id_datelocal">
@@ -230,25 +32,19 @@
         <div class="gap"></div>
 
     </div>
-    <script src="./calendar.js"></script>
 
     <script>
 
-        _id_datelocal.addEventListener('click', function(e){
-            // console.log('click');
-            // console.dir(e);
-        })
+        let zlo = window.zlo = 1;
 
-        console.dir(navigator.userAgent);
+        _tet.onclick = function(){
+            window.zlo = 2;
 
-        _id_text_datelocal.addEventListener('click', function(e){
-            // e.preventDefault();
-            // _id_datelocal.click();
-            // _id_datelocal.showPicker();
-            // _id_text_datelocal.focus();
-            // _id_datelocal.focus();
+            alert(zlo);
+        }
 
-        })
+
+
     </script>
 
 
