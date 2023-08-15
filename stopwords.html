@@ -111,6 +111,7 @@
                         subStr = el.input.substring(start, end);
 
                         subStr = subStr.replace(/[\r\n]/, ' ');
+                        subStr = subStr.replace(/(<.+>)/, '');
                         let subStr1;
                         if(start==0){
                             subStr1 = subStr.replace(/^(.+)\s\S*/, '$1...');
