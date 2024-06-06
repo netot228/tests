@@ -1,0 +1,176 @@
+html * {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+  line-height: inherit;
+  box-sizing: border-box;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+  color: inherit;
+  box-shadow: none;
+}
+
+html {
+  font-size: 10px;
+}
+
+html body {
+  font-size: 0;
+  line-height: 0;
+}
+html body a {
+  text-decoration: none;
+}
+
+.i_gallery_v2 {
+  position: relative;
+  width: 100%;
+  font-size: 0;
+}
+.i_gallery_v2 .mainarea {
+  position: relative;
+  width: 100%;
+  padding-top: 66.6667%;
+  background-image: radial-gradient(#2a2a2a, #111);
+  overflow: hidden;
+}
+.i_gallery_v2 .mainarea-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  height: 100%;
+}
+.i_gallery_v2 .mainarea-wrapper .item {
+  display: inline-flex;
+  width: 100%;
+  height: calc(100% - 40px);
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+.i_gallery_v2 .mainarea-wrapper .item-image {
+  display: inline-block;
+  height: 100%;
+}
+.i_gallery_v2 .mainarea .leftbtn, .i_gallery_v2 .mainarea .rightbtn {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  border-radius: 50%;
+  background: #292929;
+  transform: scale(1, 1);
+  opacity: 1;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.i_gallery_v2 .mainarea .leftbtn:before, .i_gallery_v2 .mainarea .rightbtn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  opacity: 1;
+  background: url(https://static.gazeta.ru/nm2021/img/icons/ui/_ui_arrow_2x.svg) no-repeat 50% 50%;
+}
+.i_gallery_v2 .mainarea .leftbtn span, .i_gallery_v2 .mainarea .rightbtn span {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  right: 0;
+  opacity: 0;
+  background: url(https://static.gazeta.ru/nm2021/img/icons/ui/_ui_arrow_2x.svg) no-repeat 50% 50%;
+  transition: right 0.6s ease;
+  background-size: cover;
+}
+.i_gallery_v2 .mainarea .leftbtn:not(.disable):hover:before, .i_gallery_v2 .mainarea .rightbtn:not(.disable):hover:before {
+  opacity: 0;
+}
+.i_gallery_v2 .mainarea .leftbtn:not(.disable):hover span, .i_gallery_v2 .mainarea .rightbtn:not(.disable):hover span {
+  opacity: 1;
+  right: -40px;
+}
+.i_gallery_v2 .mainarea .leftbtn {
+  transform: scale(-1, 1);
+  left: 10px;
+}
+.i_gallery_v2 .mainarea .leftbtn.disable {
+  opacity: 0.2;
+  cursor: default;
+}
+.i_gallery_v2 .mainarea .rightbtn {
+  right: 10px;
+}
+.i_gallery_v2 .mainarea .rightbtn.disable {
+  opacity: 0.2;
+  cursor: default;
+}
+.i_gallery_v2 .mainarea .zoombtn {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 1;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.i_gallery_v2 .mainarea .zoombtn:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(41, 41, 41, 0.3);
+  transition: all 0.3s ease;
+}
+.i_gallery_v2 .mainarea .zoombtn:after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 31px;
+  right: 20px;
+  width: 20px;
+  height: 18px;
+  margin: auto;
+  background: url(https://static.gazeta.ru//nm2021//img/pinch_zoom.svg) no-repeat 50% 50%;
+  background-size: auto 100%;
+  transform: scale(1, 1);
+  transition: all 0.5s ease;
+}
+.i_gallery_v2 .mainarea .zoombtn:hover:after {
+  transform: scale(1.1, 1.1);
+}
+.i_gallery_v2 .mainarea .zoombtn.hide {
+  opacity: 0;
+  z-index: -1;
+}
+.i_gallery_v2 .infoblock {
+  display: none;
+}
+.i_gallery_v2 .preview {
+  display: none;
+}
+
+/*# sourceMappingURL=gallery.css.map */
