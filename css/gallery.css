@@ -293,6 +293,7 @@ html body a {
   opacity: 1;
   transition: all 0.3s ease;
   cursor: pointer;
+  display: none;
 }
 .i_gallery_v2 .mainarea .zoombtn:before {
   content: "";
@@ -378,7 +379,90 @@ html body a {
   opacity: 0;
 }
 .i_gallery_v2 .preview {
-  display: none;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+}
+.i_gallery_v2 .preview-wrapper {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.i_gallery_v2 .preview-wrapper .item {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 60px;
+  height: 40px;
+  margin-left: 2px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background: #333;
+  flex-shrink: 0;
+}
+.i_gallery_v2 .preview-wrapper .item:first-child {
+  margin-left: 0;
+}
+.i_gallery_v2 .preview-wrapper .item-image {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  height: 100%;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+.i_gallery_v2 .preview-wrapper .item:hover .item-image {
+  opacity: 1;
+}
+.i_gallery_v2 .preview-wrapper .item:before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(177, 17, 22, 0.7);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.i_gallery_v2 .preview-wrapper .item:after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  height: 7px;
+  margin: auto;
+  background: url(https://static.gazeta.ru//nm2021//img/triangle_rounded.svg) no-repeat 50% 50%;
+  background-size: auto 100%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.i_gallery_v2 .preview-wrapper .item.active:before {
+  opacity: 1;
+}
+.i_gallery_v2 .preview-wrapper .item.active:after {
+  top: 0;
+  opacity: 1;
+}
+.i_gallery_v2 .preview-wrapper .item.disabled {
+  opacity: 0.3;
 }
 
 /*# sourceMappingURL=gallery.css.map */

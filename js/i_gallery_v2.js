@@ -18,6 +18,19 @@ function iGalleryV2(props){
     let itemsArr        = Array.from(mainarea.querySelectorAll('.item'));
     let arrSize         = itemsArr.length;
 
+    let preview         = root.querySelector('.preview') || null;
+    let previewSlider   = null;
+    let previewItemsArr = null;
+    if(preview){
+        previewSlider   = preview.querySelector('.preview-wrapper');
+        previewItemsArr = preview.querySelectorAll('.item');
+        previewItemsArr.forEach(el=>{
+            el.addEventListener('click', ()=>{
+                let itemNum = +el.dataset.item;
+                changeItem(itemNum);
+            })
+        })
+    }
 
     let signPlace       = root.querySelector('.signplace');
     let quantityNum     = root.querySelector('.quantity-num');
@@ -36,7 +49,16 @@ function iGalleryV2(props){
 
     quantitySum.innerHTML = inTotalImg;
 
-    if(!limit && location.search.match(/photo_num/)){
+    // check browser and version
+    let safariVersion = null;
+    if(navigator.userAgent.match(/AppleWebKit.*Version.*Safari/i)){
+        let version = navigator.userAgent.match(/version\/(\d+)\./i);
+        if(Array.isArray(version)){
+            safariVersion = +version[1];
+        }
+    }
+
+    if(!limit && location.search.match(/photo_num=(\d+)/)){
         let requiredPhoto = +location.search.match(/photo_num=(\d+)/)[1] - 1;
         if(requiredPhoto>=0 && requiredPhoto<arrSize){
             let needItem = itemsArr[requiredPhoto];
@@ -50,9 +72,11 @@ function iGalleryV2(props){
     }
 
     function slideMove(pos, behavior){
-        slider.scroll({top: 0, left: pos, behavior: behavior ? behavior : 'smooth'});
-        // slider.scroll({top: 0, left: pos, behavior: 'instant'});
-        // slider.scroll({top: 0, left: pos, behavior: 'smooth'});
+        if(safariVersion && safariVersion<16){
+            slider.scroll({top: 0, left: pos, behavior: 'instant'});
+        } else {
+            slider.scroll({top: 0, left: pos, behavior: behavior ? behavior : 'smooth'});
+        }
     }
     function loadSrc(itemNum, once){
         let itemImage =  itemsArr[itemNum].querySelector('.item-image');
@@ -65,7 +89,7 @@ function iGalleryV2(props){
             }
         }
 
-        if(itemImage.dataset.hq){
+        if(itemImage && itemImage.dataset.hq){
             let imgHq = new Image();
             imgHq.src = itemImage.dataset.hq;
             imgHq.onload = ()=>{
@@ -110,7 +134,7 @@ function iGalleryV2(props){
 
             if(location.search != '') {
 
-                if(location.search.match(/photo_num/)) {
+                if(location.search.match(/photo_num=\d+/)) {
                     currentUrl =  currentUrl + location.search.replace(/photo_num=\d+/, 'photo_num=' + curPhoto);
                 } else {
                     currentUrl =  currentUrl + location.search + '&photo_num=' + curPhoto;
@@ -127,6 +151,22 @@ function iGalleryV2(props){
             }
         }
 
+    }
+
+    function previewItemHolder(itemNum){
+        if(preview){
+            let activeItem = preview.querySelector('.item.active');
+            activeItem.classList.remove('active');
+
+            activeItem = previewItemsArr[itemNum];
+            activeItem.classList.add('active');
+
+            if(safariVersion && safariVersion<16){
+                activeItem.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'instant'});
+            } else {
+                activeItem.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'smooth'});
+            }
+        }
     }
 
     function changeItem(itemNum, slideMoveType){
@@ -146,9 +186,12 @@ function iGalleryV2(props){
         slideMove(itemsArr[itemNum].offsetLeft, slideMoveType);
         setCaption(itemNum);
         addUrlParams(itemNum);
+        previewItemHolder(itemNum);
+
         if(itemNum<inTotalImg){
             quantityNum.innerHTML = itemNum+1;
         }
+        
     }
 
     rightBtn.addEventListener('click', ()=>{
@@ -160,6 +203,8 @@ function iGalleryV2(props){
         changeItem(--curItem);
     })
 
+    zoombtn.addEventListener('click',()=>{
 
+    })
 
 }
