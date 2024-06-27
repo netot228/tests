@@ -137,6 +137,7 @@ function iGalleryV2(props){
                 if(location.search.match(/photo_num=\d+/)) {
                     currentUrl =  currentUrl + location.search.replace(/photo_num=\d+/, 'photo_num=' + curPhoto);
                 } else {
+                    
                     currentUrl =  currentUrl + location.search + '&photo_num=' + curPhoto;
                 }
 
