@@ -24,14 +24,8 @@ function iGalleryV2(props){
     if(preview){
         previewSlider   = preview.querySelector('.preview-wrapper');
         previewItemsArr = preview.querySelectorAll('.item');
-        previewItemsArr.forEach(el=>{
-            el.addEventListener('click', ()=>{
-                let itemNum = +el.dataset.item;
-                changeItem(itemNum);
-            })
-        })
     }
-
+    
     let signPlace       = root.querySelector('.signplace');
     let quantityNum     = root.querySelector('.quantity-num');
     let quantitySum     = root.querySelector('.quantity-sum');
@@ -69,6 +63,17 @@ function iGalleryV2(props){
         }
     } else {
         quantityNum.innerHTML = '1';
+    }
+
+    // action part
+    if(preview){
+        previewItemsArr.forEach(el=>{
+            el.addEventListener('click', ()=>{
+                let itemNum = +el.dataset.item;
+                changeItem(itemNum);
+                curItem = itemNum;
+            })
+        })
     }
 
     function slideMove(pos, behavior){
@@ -130,7 +135,7 @@ function iGalleryV2(props){
         if(!limit){
 
             let currentUrl = location.origin + location.pathname;
-            let curPhoto = itemNum + 1;
+            let curPhoto = itemNum + 1 > inTotalImg ? inTotalImg : itemNum + 1;
 
             if(location.search != '') {
 
@@ -156,17 +161,23 @@ function iGalleryV2(props){
 
     function previewItemHolder(itemNum){
         if(preview){
-            let activeItem = preview.querySelector('.item.active');
-            activeItem.classList.remove('active');
-
-            activeItem = previewItemsArr[itemNum];
-            activeItem.classList.add('active');
-
-            if(safariVersion && safariVersion<16){
-                activeItem.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'instant'});
-            } else {
-                activeItem.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'smooth'});
+            let activeItem = null;
+            activeItem = preview.querySelector('.item.active') || null;
+            if(activeItem){
+                activeItem.classList.remove('active');
             }
+
+            if(previewItemsArr[itemNum]){
+                activeItem = previewItemsArr[itemNum];
+                activeItem.classList.add('active');
+
+                if(safariVersion && safariVersion<16){
+                    activeItem.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'instant'});
+                } else {
+                    activeItem.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'smooth'});
+                }
+            }
+            
         }
     }
 
@@ -195,6 +206,61 @@ function iGalleryV2(props){
         
     }
 
+    function fullScreenToggle(action){
+        
+        if( document.fullscreenEnabled ||
+            document.webkitFullscreenEnabled ||
+            document.mozFullScreenEnabled ||
+            document.msFullscreenEnabled
+            ){
+            
+            if(action=='open'){
+                if (root.requestFullscreen) {
+                    root.requestFullscreen();
+                } else if (root.mozRequestFullScreen) { /* Firefox */
+                    root.mozRequestFullScreen();
+                } else if (root.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                    root.webkitRequestFullscreen();
+                } else if (root.msRequestFullscreen) { /* IE/Edge */
+                    root.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {  /* Firefox */
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {     /* IE/Edge */
+                    document.msExitFullscreen();
+                }
+            }
+        } else {
+            // сделать клон галереи ИЛИ вытащить галерею в body, у которой не будет кнопки зум
+            // вызвать на нее эту же функцию
+            // предусмотреть самоуничтожение 
+            // root.classList.add('m_fixed')
+        }
+        
+    }
+
+    function fullScreenChangeListener() {
+        if( document.fullscreenElement===null || 
+            document.webkitFullscreenElement===null || 
+            document.mozFullScreenElement===null || 
+            document.msFullscreenElement===null
+        ){
+            // вышли из фулскрина
+            root.classList.remove('m_fullscreen');
+
+        } else {
+            // вошли в фулскрин
+            root.classList.add('m_fullscreen');
+
+        }
+        changeItem(curItem, 'instant');
+    }
+
     rightBtn.addEventListener('click', ()=>{
         if(rightBtn.classList.contains('disable')) return;
         changeItem(++curItem);
@@ -204,8 +270,49 @@ function iGalleryV2(props){
         changeItem(--curItem);
     })
 
+    if(!limit ){
+        document.addEventListener('keydown', e=>{
+            if(e.keyCode==39 || e.code=='ArrowRight'){
+                if(rightBtn.classList.contains('disable')) return;
+                changeItem(++curItem);
+            }
+            if(e.keyCode==37 || e.code=='ArrowLeft'){
+                if(leftBtn.classList.contains('disable')) return;
+                changeItem(--curItem);
+            }
+        });
+    }
+
     zoombtn.addEventListener('click',()=>{
+        
+        fullScreenToggle('open');
 
     })
+
+    closeBtn.addEventListener('click', ()=>{
+        
+        fullScreenToggle('close');
+
+    })
+
+    // fullscreenChanges
+        document.addEventListener('fullscreenchange', ()=>{
+            fullScreenChangeListener();
+        });
+        document.addEventListener('mozfullscreenchange', ()=>{
+            fullScreenChangeListener();
+        }); 
+        document.addEventListener('webkitfullscreenchange', ()=>{
+            fullScreenChangeListener();
+        });
+        document.addEventListener('MSFullscreenChange', function(){
+            fullScreenChangeListener();
+        });
+
+    window.addEventListener('resize', ()=>{
+        changeItem(curItem, 'instant');
+    })
+
+
 
 }
