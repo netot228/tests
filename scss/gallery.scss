@@ -45,6 +45,24 @@ $serif: 'Lora', serif;
         background-image: radial-gradient(#333, #111);
         overflow: hidden;
 
+        @include screen(pda){
+            &:after {
+                content: '';
+                position: absolute;
+                z-index: 20;
+                left: 0;
+                right: 0;
+                bottom: 16px;
+                width: 54px;
+                height: 28px;
+                margin: auto;
+                background: url(https://static.gazeta.ru/nm2021/img/icons/ui/swipe.svg) no-repeat 50% 50%;
+                background-size: cover;
+                opacity: 1;
+                transition: all 0.3s ease;
+            }
+        }
+
         &-wrapper {
             position: absolute;
             // position: relative;
@@ -277,6 +295,9 @@ $serif: 'Lora', serif;
             opacity: 1;
             transition: all 0.3s ease;
             cursor: pointer;
+            @include screen(pda){
+                display: none;
+            }
 
             &:before {
                 content: '';
@@ -410,6 +431,9 @@ $serif: 'Lora', serif;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+        @include screen(pda){
+            padding: 10px 20px;
+        }
 
         .signplace {
             position: relative;
@@ -470,6 +494,10 @@ $serif: 'Lora', serif;
         width: 100%;
         height: 40px;
         overflow: hidden;
+
+        @include screen(pda){
+            display: none;
+        }
         &-wrapper {
             position: relative;
             width: 100%;
@@ -636,95 +664,32 @@ $serif: 'Lora', serif;
                     bottom: -60px;
                 }
             }
+
+            @include screen(pda){
+                top: 20px;
+                right: 20px;
+                background: rgba(255, 255, 255, 0.9);
+            }
         }
         .text_toggle_btn {
-            display: none !important;
             position: absolute;
-            z-index: 20;
-            top: 120px;
-            right: 40px;
+            z-index: 13;
+            bottom: 20px;
+            right: 6px;
             width: 40px;
             height: 40px;
-            background: rgba(0,0,0,.5);
-            cursor: pointer;
-
+            background: url(https://static.gazeta.ru/nm2021//img/icons/ui/traingle_rounded_black.svg) no-repeat 50% 50% rgba(255, 255, 255, 0.9);
+            background-size: 18px;
             &:before {
                 content: 'text';
-                display: block;
-                font: normal 10px/10px sans-serif;
-                text-transform: uppercase;
-                color: #fff;
-                text-align: center;
-                opacity: 0;
-                transition: all 0.3s ease;
-            }
-            &:after {
-                content: '';
-                display: block;
                 position: absolute;
-                top: 17px;
-                width: 0;
-                left: 24px;
+                top: 4px;
+                left: 0;
                 right: 0;
-                margin: auto;
-                border-top: 6px solid #fff;
-                border-left: 6px solid transparent;
-                border-right: 6px solid transparent;
-                opacity: 0;
-                transition: all 0.3s ease;
-            }
-            span {
-                position: absolute;
-                display: block;
-                width: 24px;
-                height: 2px;
-                background: #fff;
-                top: 10px;
-                left: 8px;
-                transition: all 0.2s ease 0.15s;
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 17px;
-                    height: 2px;
-                    top: 8px;
-                    left: 0;
-                    background: #fff;
-                    transition: all 0.1s ease 0.05s;
-                }
-                &:after {
-                    content: '';
-                    position: absolute;
-                    width: 20px;
-                    height: 2px;
-                    top: 16px;
-                    left: 0;
-                    background: #fff;
-                    transition: all 0.1s ease;
-                }
-            }
-            &.text_hid {
-                &:after {
-                    transform: rotate(180deg);
-                }
-            }
-            &:hover {
-                &:before {
-                    opacity: 1;
-                }
-                &:after {
-                    left: 0;
-                    opacity: 1;
-                }
-                span {
-                    width: 0px;
-                    &:before {
-                        width: 0px;
-                    }
-                    &:after {
-                        width: 0px;
-                    }
-                }
+                font: 400 10px/1 Roboto, sans-serif;
+                color: #292929;
+                text-align: center;
+                text-transform: uppercase;
             }
         }
 
@@ -747,6 +712,20 @@ $serif: 'Lora', serif;
                 transition: all 0.3s ease;
             }
 
+            @include screen(pda){
+                &:before {
+                    top: 33px;
+                    left: 20px;
+                    width: 90px;
+                    background-size: 100% auto;
+                }
+                &:after {
+                    top: 0;
+                    bottom: 0;
+                }
+                
+            }
+
 
             &-wrapper {
 
@@ -756,6 +735,14 @@ $serif: 'Lora', serif;
                 @include screen(1200){
                     right: 40px;
                     bottom: 200px;
+                }
+
+                @include screen(pda){
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+
                 }
 
                 .item {
@@ -828,6 +815,18 @@ $serif: 'Lora', serif;
                     background: linear-gradient(0deg, #fff, transparent);
                 }
             }
+            @include screen(pda){
+                top: auto;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                min-height: 100px;
+                max-height: 150px;
+                background: rgba(255,255,255,.9);
+                padding: 10px 50px 10px 20px;
+
+            }
 
 
             .signplace {
@@ -865,6 +864,11 @@ $serif: 'Lora', serif;
                     align-items: center;
                     justify-content: center;
                     
+                }
+                @include screen(pda){
+                    top: 0;
+                    right: 0;
+                    bottom: auto;
                 }
             }
         }

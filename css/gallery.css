@@ -45,6 +45,23 @@ html body a {
   background-image: radial-gradient(#333, #111);
   overflow: hidden;
 }
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2 .mainarea:after {
+    content: "";
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    width: 54px;
+    height: 28px;
+    margin: auto;
+    background: url(https://static.gazeta.ru/nm2021/img/icons/ui/swipe.svg) no-repeat 50% 50%;
+    background-size: cover;
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+}
 .i_gallery_v2 .mainarea-wrapper {
   position: absolute;
   top: 0;
@@ -246,6 +263,11 @@ html body a {
   transition: all 0.3s ease;
   cursor: pointer;
 }
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2 .mainarea .leftbtn, .i_gallery_v2 .mainarea .rightbtn {
+    display: none;
+  }
+}
 .i_gallery_v2 .mainarea .leftbtn:before, .i_gallery_v2 .mainarea .rightbtn:before {
   content: "";
   position: absolute;
@@ -341,6 +363,11 @@ html body a {
   justify-content: space-between;
   align-items: flex-start;
 }
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2 .infoblock {
+    padding: 10px 20px;
+  }
+}
 .i_gallery_v2 .infoblock .signplace {
   position: relative;
   font: normal 13px/1.5 "Roboto", sans-serif;
@@ -390,6 +417,11 @@ html body a {
   width: 100%;
   height: 40px;
   overflow: hidden;
+}
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2 .preview {
+    display: none;
+  }
 }
 .i_gallery_v2 .preview-wrapper {
   position: relative;
@@ -543,90 +575,33 @@ html body a {
   right: -60px;
   bottom: -60px;
 }
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2.m_fullscreen .closebtn {
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
 .i_gallery_v2.m_fullscreen .text_toggle_btn {
-  display: none !important;
   position: absolute;
-  z-index: 20;
-  top: 120px;
-  right: 40px;
+  z-index: 13;
+  bottom: 20px;
+  right: 6px;
   width: 40px;
   height: 40px;
-  background: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
+  background: url(https://static.gazeta.ru/nm2021//img/icons/ui/traingle_rounded_black.svg) no-repeat 50% 50% rgba(255, 255, 255, 0.9);
+  background-size: 18px;
 }
 .i_gallery_v2.m_fullscreen .text_toggle_btn:before {
   content: "text";
-  display: block;
-  font: normal 10px/10px sans-serif;
-  text-transform: uppercase;
-  color: #fff;
-  text-align: center;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn:after {
-  content: "";
-  display: block;
   position: absolute;
-  top: 17px;
-  width: 0;
-  left: 24px;
+  top: 4px;
+  left: 0;
   right: 0;
-  margin: auto;
-  border-top: 6px solid #fff;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn span {
-  position: absolute;
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: #fff;
-  top: 10px;
-  left: 8px;
-  transition: all 0.2s ease 0.15s;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn span:before {
-  content: "";
-  position: absolute;
-  width: 17px;
-  height: 2px;
-  top: 8px;
-  left: 0;
-  background: #fff;
-  transition: all 0.1s ease 0.05s;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn span:after {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 2px;
-  top: 16px;
-  left: 0;
-  background: #fff;
-  transition: all 0.1s ease;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn.text_hid:after {
-  transform: rotate(180deg);
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn:hover:before {
-  opacity: 1;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn:hover:after {
-  left: 0;
-  opacity: 1;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn:hover span {
-  width: 0px;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn:hover span:before {
-  width: 0px;
-}
-.i_gallery_v2.m_fullscreen .text_toggle_btn:hover span:after {
-  width: 0px;
+  font: 400 10px/1 Roboto, sans-serif;
+  color: #292929;
+  text-align: center;
+  text-transform: uppercase;
 }
 .i_gallery_v2.m_fullscreen .mainarea {
   height: 100vh;
@@ -646,6 +621,18 @@ html body a {
   opacity: 1;
   transition: all 0.3s ease;
 }
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2.m_fullscreen .mainarea:before {
+    top: 33px;
+    left: 20px;
+    width: 90px;
+    background-size: 100% auto;
+  }
+  .i_gallery_v2.m_fullscreen .mainarea:after {
+    top: 0;
+    bottom: 0;
+  }
+}
 .i_gallery_v2.m_fullscreen .mainarea-wrapper {
   left: 40px;
   right: 300px;
@@ -654,6 +641,14 @@ html body a {
   .i_gallery_v2.m_fullscreen .mainarea-wrapper {
     right: 40px;
     bottom: 200px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2.m_fullscreen .mainarea-wrapper {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 .i_gallery_v2.m_fullscreen .mainarea-wrapper .item {
@@ -719,6 +714,19 @@ html body a {
     background: linear-gradient(0deg, #fff, transparent);
   }
 }
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2.m_fullscreen .infoblock {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 100px;
+    max-height: 150px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 50px 10px 20px;
+  }
+}
 .i_gallery_v2.m_fullscreen .infoblock .signplace {
   max-width: 1200px;
   margin: 0 auto;
@@ -754,6 +762,13 @@ html body a {
     flex-flow: row;
     align-items: center;
     justify-content: center;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .i_gallery_v2.m_fullscreen .infoblock .quantity {
+    top: 0;
+    right: 0;
+    bottom: auto;
   }
 }
 .i_gallery_v2.m_fullscreen .b_photoreports_digest {
