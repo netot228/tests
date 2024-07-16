@@ -25,7 +25,7 @@ function iGalleryV2(props){
         previewSlider   = preview.querySelector('.preview-wrapper');
         previewItemsArr = preview.querySelectorAll('.item');
     }
-    
+
     let signPlace       = root.querySelector('.signplace');
     let quantityNum     = root.querySelector('.quantity-num');
     let quantitySum     = root.querySelector('.quantity-sum');
@@ -76,15 +76,38 @@ function iGalleryV2(props){
         })
     }
 
-    function slideMove(pos, behavior){
-        if(safariVersion && safariVersion<16){
-            slider.scroll({top: 0, left: pos, behavior: 'instant'});
+    //detect mobile
+    let isMobile = (function(){
+        if(/iPhone|iPod|iPad|Android|Windows Phone|\bWindows(?:.+)ARM\b|BlackBerry|BB10|Opera Mini|\b(CriOS|Chrome)(?:.+)Mobile|Mobile(?:.+)Firefox\b/i.test(navigator.userAgent)){
+            return true;
         } else {
-            slider.scroll({top: 0, left: pos, behavior: behavior ? behavior : 'smooth'});
+            return false;
+        }
+    })();
+    let isIos = (function(){
+        if(/iPhone|iPod|iPad/i.test(navigator.userAgent)){
+            return true;
+        } else {
+            return false;
+        }
+    })();
+
+    function safarySlideMove(pos){
+        // сделать анимацию сдвига для сраного сафарика
+
+    }
+
+    function slideMove(pos, behavior){
+        if(safariVersion && safariVersion<5){
+            // slider.scroll({top: 0, left: pos, behavior: 'instant'});
+            // slider.scrollTo(pos, 0);
+            // itemsArr[curItem].scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
+        } else {
+            slider.scrollTo({top: 0, left: pos, behavior: behavior ? behavior : 'smooth'});
         }
     }
     function loadSrc(itemNum, once){
-        let itemImage =  itemsArr[itemNum].querySelector('.item-image');
+        let itemImage =  itemsArr[itemNum].querySelector('.item-image') || null;
 
         if(itemImage && itemImage.getAttribute('src')==''){
             let img = new Image();
@@ -142,7 +165,7 @@ function iGalleryV2(props){
                 if(location.search.match(/photo_num=\d+/)) {
                     currentUrl =  currentUrl + location.search.replace(/photo_num=\d+/, 'photo_num=' + curPhoto);
                 } else {
-                    
+
                     currentUrl =  currentUrl + location.search + '&photo_num=' + curPhoto;
                 }
 
@@ -177,7 +200,7 @@ function iGalleryV2(props){
                     activeItem.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'smooth'});
                 }
             }
-            
+
         }
     }
 
@@ -203,17 +226,17 @@ function iGalleryV2(props){
         if(itemNum<inTotalImg){
             quantityNum.innerHTML = itemNum+1;
         }
-        
+
     }
 
     function fullScreenToggle(action){
-        
+
         if( document.fullscreenEnabled ||
             document.webkitFullscreenEnabled ||
             document.mozFullScreenEnabled ||
             document.msFullscreenEnabled
             ){
-            
+
             if(action=='open'){
                 if (root.requestFullscreen) {
                     root.requestFullscreen();
@@ -238,16 +261,16 @@ function iGalleryV2(props){
         } else {
             // сделать клон галереи ИЛИ вытащить галерею в body, у которой не будет кнопки зум
             // вызвать на нее эту же функцию
-            // предусмотреть самоуничтожение 
+            // предусмотреть самоуничтожение
             // root.classList.add('m_fixed')
         }
-        
+
     }
 
     function fullScreenChangeListener() {
-        if( document.fullscreenElement===null || 
-            document.webkitFullscreenElement===null || 
-            document.mozFullScreenElement===null || 
+        if( document.fullscreenElement===null ||
+            document.webkitFullscreenElement===null ||
+            document.mozFullScreenElement===null ||
             document.msFullscreenElement===null
         ){
             // вышли из фулскрина
@@ -284,13 +307,13 @@ function iGalleryV2(props){
     }
 
     zoombtn.addEventListener('click',()=>{
-        
+
         fullScreenToggle('open');
 
     })
 
     closeBtn.addEventListener('click', ()=>{
-        
+
         fullScreenToggle('close');
 
     })
@@ -301,7 +324,7 @@ function iGalleryV2(props){
         });
         document.addEventListener('mozfullscreenchange', ()=>{
             fullScreenChangeListener();
-        }); 
+        });
         document.addEventListener('webkitfullscreenchange', ()=>{
             fullScreenChangeListener();
         });
@@ -313,6 +336,47 @@ function iGalleryV2(props){
         changeItem(curItem, 'instant');
     })
 
+    if(isMobile){
+        let startX          = 0;
+        let shift           = 0;
+        let startScroll     = 0;
 
+        function touchMoveHolder(e){
+            e.preventDefault();
+            shift = startX - e.targetTouches[0].clientX;
+
+
+            // console.log(`slider.scrollLeft: ${slider.scrollLeft}\n  shift: ${shift}`);
+            // slideMove(startScroll + shift);
+            let sliderShift = startScroll + shift;
+            slider.scrollTo(sliderShift, 0);
+        }
+
+        mainarea.addEventListener('touchstart', e=>{
+            startX = e.targetTouches[0].clientX;
+            startScroll = slider.scrollLeft;
+            console.dir(slider);
+            document.addEventListener('touchmove', touchMoveHolder, {passive: false});
+        }, {passive: false})
+
+
+
+        document.addEventListener('touchend', e=>{
+
+            document.removeEventListener('touchmove', touchMoveHolder);
+
+            if(Math.abs(shift)>60){
+                if(shift>0){
+                    ++curItem;
+                } else {
+                    --curItem;
+                }
+            }
+            changeItem(curItem, 'smooth');
+            startX          = 0;
+            shift           = 0;
+            startScroll     = 0;
+        })
+    }
 
 }

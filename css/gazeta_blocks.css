@@ -1,0 +1,341 @@
+.b_medal_paris2024 {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: #10253C;
+  margin-bottom: 40px;
+}
+.b_medal_paris2024:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url(https://static.gazeta.ru/nm2021/img/icons/sport/olymps/paris2024/medal_bg_olymp2024_disciplines.svg) no-repeat 50% 0;
+  opacity: 0.06;
+}
+.b_medal_paris2024:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 275px;
+  z-index: 2;
+  background: linear-gradient(to bottom, transparent, #10253C);
+}
+.b_medal_paris2024.m_vrez {
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024.m_vrez {
+    margin: 0 -20px 20px;
+    width: auto;
+  }
+}
+.b_medal_paris2024.m_vrez .b_medal_paris2024-places .item-result {
+  width: 250px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024.m_vrez .b_medal_paris2024-places .item-result {
+    width: 100px;
+  }
+}
+.b_medal_paris2024-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 20px 20px;
+  background: url(https://static.gazeta.ru/nm2021/img/icons/sport/olymps/paris2024/medal_bg_corner.png) no-repeat 100% 0;
+  background-size: 300px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-header {
+    padding: 20px;
+    background-size: auto 80px;
+  }
+}
+.b_medal_paris2024-header .item {
+  display: flex;
+  flex-flow: column;
+}
+.b_medal_paris2024-header .item:first-child {
+  justify-content: flex-start;
+}
+.b_medal_paris2024-header .item:last-child {
+  justify-content: flex-end;
+}
+.b_medal_paris2024-header .item-title {
+  font: 700 32px/1 Lora, serif;
+  color: #fff;
+  margin-bottom: 15px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-header .item-title {
+    font: 700 22px/1 Lora, serif;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+}
+.b_medal_paris2024-header .item-subtitle {
+  font: 400 20px/1 Roboto, sans-serif;
+  color: #fff;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-header .item-subtitle {
+    font: 400 16px/1 Roboto, sans-serif;
+  }
+}
+.b_medal_paris2024-header .item-logo {
+  display: inline-flex;
+}
+.b_medal_paris2024-header .item-logo img {
+  display: inline-block;
+  height: 18px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-header .item-logo img {
+    height: 12px;
+  }
+}
+.b_medal_paris2024-places {
+  position: relative;
+  z-index: 10;
+  padding: 0 20px 60px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places {
+    padding: 0 0 60px;
+  }
+}
+.b_medal_paris2024-places .item {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  border-top: 1px dashed #2D4258;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .item {
+    padding: 10px 20px;
+  }
+}
+.b_medal_paris2024-places .item:first-child {
+  border-top: 0;
+}
+.b_medal_paris2024-places .item-result {
+  width: 340px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .item-result {
+    width: 130px;
+  }
+}
+.b_medal_paris2024-places .item-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+}
+.b_medal_paris2024-places .item-place {
+  display: inline-flex;
+  align-items: center;
+  width: 20px;
+  font: 400 15px/1 Roboto, sans-serif;
+  color: #BFBFBF;
+  margin-right: 20px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .item-place {
+    font: 400 13px/1 Roboto, sans-serif;
+    margin-right: 7px;
+  }
+}
+.b_medal_paris2024-places .item-flag {
+  position: relative;
+  display: inline-flex;
+  width: 22px;
+  height: 16px;
+  margin-right: 40px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .item-flag {
+    width: 16px;
+    height: 12px;
+    margin-right: 14px;
+  }
+}
+.b_medal_paris2024-places .item-flag .flag-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  border-radius: 2px;
+}
+.b_medal_paris2024-places .item-flag .flag-icon:before {
+  display: none;
+}
+.b_medal_paris2024-places .item-name {
+  font: 400 15px/1 Roboto, sans-serif;
+  color: #fff;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .item-name {
+    font: 400 13px/1.2 Roboto, sans-serif;
+  }
+}
+.b_medal_paris2024-places .item-score {
+  display: inline-flex;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  font: 400 15px/1 Roboto, sans-serif;
+  color: #fff;
+}
+.b_medal_paris2024-places .item-score:first-child {
+  font-weight: 700;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .item-score {
+    width: 30px;
+    font: 400 13px/1 Roboto, sans-serif;
+    flex-shrink: 0;
+  }
+}
+.b_medal_paris2024-places .medal_places + .item {
+  border-top: 0;
+}
+.b_medal_paris2024-places .legend {
+  justify-content: flex-end;
+}
+.b_medal_paris2024-places .legend-all span {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #C4C4C4;
+  border-radius: 50%;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .legend-all span {
+    width: 12px;
+    height: 12px;
+  }
+}
+.b_medal_paris2024-places .legend-all span:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -9px;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFDD2D;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .legend-all span:before {
+    width: 12px;
+    height: 12px;
+    left: -6px;
+  }
+}
+.b_medal_paris2024-places .legend-all span:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -9px;
+  z-index: -1;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #D19829;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .legend-all span:after {
+    width: 12px;
+    height: 12px;
+    right: -6px;
+  }
+}
+.b_medal_paris2024-places .legend-gold span, .b_medal_paris2024-places .legend-silver span, .b_medal_paris2024-places .legend-bronze span {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  z-index: 2;
+  background: #FFDD2D;
+  border-radius: 50%;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .legend-gold span, .b_medal_paris2024-places .legend-silver span, .b_medal_paris2024-places .legend-bronze span {
+    width: 12px;
+    height: 12px;
+  }
+}
+.b_medal_paris2024-places .legend-silver span {
+  background: #C4C4C4;
+}
+.b_medal_paris2024-places .legend-bronze span {
+  background: #D19829;
+}
+.b_medal_paris2024-places .medal_places {
+  padding: 5px 20px;
+  background: linear-gradient(to top, #22364C, #28405A);
+  border-radius: 6px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .medal_places {
+    padding: 5px 0;
+    border-radius: 0;
+  }
+}
+.b_medal_paris2024-places .medal_places .item {
+  padding: 15px 10px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .medal_places .item {
+    padding: 10px 20px;
+  }
+}
+.b_medal_paris2024-places .medal_places .item-place {
+  font-weight: 700;
+  color: #fff;
+  margin-right: 11px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .medal_places .item-place {
+    margin-right: 7px;
+  }
+}
+.b_medal_paris2024-places .medal_places .item-flag {
+  width: 40px;
+  height: 28px;
+  margin-right: 31px;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .medal_places .item-flag {
+    width: 22px;
+    height: 16px;
+    margin-right: 14px;
+  }
+}
+.b_medal_paris2024-places .medal_places .item-name {
+  font: 500 18px/1 Roboto, sans-serif;
+}
+@media screen and (max-width: 1023px) {
+  .b_medal_paris2024-places .medal_places .item-name {
+    font: 500 15px/1 Roboto, sans-serif;
+  }
+}
+
+/*# sourceMappingURL=gazeta_blocks.css.map */

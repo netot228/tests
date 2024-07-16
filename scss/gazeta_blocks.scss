@@ -1,0 +1,342 @@
+@mixin screen($size){
+    @if $size == pda {
+        @media screen and (max-width: 1023px) { @content; }
+    }
+}
+
+.b_medal_paris2024 {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: #10253C;
+    margin-bottom: 40px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url(https://static.gazeta.ru/nm2021/img/icons/sport/olymps/paris2024/medal_bg_olymp2024_disciplines.svg) no-repeat 50% 0;
+        opacity: .06;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 275px;
+        z-index: 2;
+        background: linear-gradient(to bottom, transparent, #10253C);
+    }
+
+    &.m_vrez {
+        margin-bottom: 20px;
+        @include screen(pda){
+            margin: 0 -20px 20px;
+            width: auto;
+        }
+        .b_medal_paris2024-places {
+            .item {
+                &-result {
+                    width: 250px;
+                    @include screen(pda){
+                        width: 100px;
+                    }
+                }
+            }
+        }
+    }
+
+    &-header {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px 20px 20px;
+        background: url(https://static.gazeta.ru/nm2021/img/icons/sport/olymps/paris2024/medal_bg_corner.png) no-repeat 100% 0;
+        background-size: 300px;
+        @include screen(pda){
+            padding: 20px;
+            background-size: auto 80px;
+            // min-height: 150px;
+        }
+
+        .item {
+            display: flex;
+            flex-flow: column;
+
+            &:first-child {
+                justify-content: flex-start;
+            }
+            &:last-child {
+                justify-content: flex-end;
+            }
+
+            &-title {
+                font: 700 32px/1 Lora, serif;
+                color: #fff;
+                margin-bottom: 15px;
+                @include screen(pda){
+                    font: 700 22px/1 Lora, serif;
+                    color: #fff;
+                    margin-bottom: 5px;
+                    // display: none;
+                }
+            }
+            &-subtitle {
+                font: 400 20px/1 Roboto, sans-serif;
+                color: #fff;
+                @include screen(pda){
+                    // display: none;
+                    font: 400 16px/1 Roboto, sans-serif;
+                }
+            }
+            &-logo {
+                display: inline-flex;
+                img {
+                    display: inline-block;
+                    height: 18px;
+                    @include screen(pda){
+                        height: 12px;
+                    }
+                }
+                @include screen(pda){
+                    // display: none;
+                }
+            }
+        }
+    }
+
+    &-places {
+        position: relative;
+        z-index: 10;
+        padding: 0 20px 60px;
+        @include screen(pda){
+            padding: 0 0 60px;
+        }
+
+        .item {
+            display: inline-flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+            border-top: 1px dashed #2D4258;
+
+            @include screen(pda){
+                padding: 10px 20px;
+            }
+
+            &:first-child {
+                border-top: 0;
+            }
+
+            &-result {
+                width: 340px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-shrink: 0;
+
+                @include screen(pda){
+                    width: 130px;
+                }
+            }
+            &-info {
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-flow: row nowrap;
+            }
+
+            &-place {
+                display: inline-flex;
+                align-items: center;
+                width: 20px;
+                font: 400 15px/1 Roboto, sans-serif;
+                color: #BFBFBF;
+                margin-right: 20px;
+
+                @include screen(pda){
+                    font: 400 13px/1 Roboto, sans-serif;
+                    margin-right: 7px;
+                }
+            }
+            &-flag {
+                position: relative;
+                display: inline-flex;
+                width: 22px;
+                height: 16px;
+                margin-right: 40px;
+
+                @include screen(pda){
+                    width: 16px;
+                    height: 12px;
+                    margin-right: 14px;
+                }
+
+                .flag-icon {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    border-radius: 2px;
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+            &-name {
+                font: 400 15px/1 Roboto, sans-serif;
+                color: #fff;
+                @include screen(pda){
+                    font: 400 13px/1.2 Roboto, sans-serif;
+                }
+            }
+            &-score {
+                display: inline-flex;
+                width: 40px;
+                justify-content: center;
+                align-items: center;
+                font: 400 15px/1 Roboto, sans-serif;
+                color: #fff;
+                &:first-child {
+                    font-weight: 700;
+                }
+
+                @include screen(pda){
+                    width: 30px;
+                    font: 400 13px/1 Roboto, sans-serif;
+                    flex-shrink: 0;
+                }
+            }
+        }
+        .medal_places + .item {
+            border-top: 0;
+        }
+
+        .legend {
+            justify-content: flex-end;
+            &-all {
+                span {
+                    position: relative;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    background: #C4C4C4;
+                    border-radius: 50%;
+                    @include screen(pda){
+                        width: 12px;
+                        height: 12px;
+                    }
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: -9px;
+                        z-index: 1;
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 50%;
+                        background: #FFDD2D;
+                        @include screen(pda){
+                            width: 12px;
+                            height: 12px;
+                            left: -6px;
+                        }
+                    }
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        right: -9px;
+                        z-index: -1;
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 50%;
+                        background: #D19829;
+                        @include screen(pda){
+                            width: 12px;
+                            height: 12px;
+                            right: -6px;
+                        }
+                    }
+                }
+            }
+            &-gold, &-silver, &-bronze {
+                span {
+                    position: relative;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    z-index: 2;
+                    background: #FFDD2D;
+                    border-radius: 50%;
+                    @include screen(pda){
+                        width: 12px;
+                        height: 12px;
+                    }
+                }
+            }
+            &-silver {
+                span {
+                    background: #C4C4C4;
+                }
+            }
+            &-bronze {
+                span {
+                    background: #D19829;
+                }
+            }
+
+        }
+
+        .medal_places {
+            padding: 5px 20px;
+            background: linear-gradient(to top, #22364C, #28405A);
+            border-radius: 6px;
+
+            @include screen(pda){
+                padding: 5px 0;
+                border-radius: 0;
+            }
+
+            .item {
+                padding: 15px 10px;
+                @include screen(pda){
+                    padding: 10px 20px;
+                }
+
+                &-place {
+                    font-weight: 700;
+                    color: #fff;
+                    margin-right: 11px;
+                    @include screen(pda){
+                        margin-right: 7px;
+                    }
+                }
+                &-flag {
+                    width: 40px;
+                    height: 28px;
+                    margin-right: 31px;
+                    @include screen(pda){
+                        width: 22px;
+                        height: 16px;
+                        margin-right: 14px;
+                    }
+                }
+                &-name {
+                    font: 500 18px/1 Roboto, sans-serif;
+                    @include screen(pda){
+                        font: 500 15px/1 Roboto, sans-serif;
+                    }
+                }
+            }
+        }
+    }
+}
